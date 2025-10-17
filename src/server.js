@@ -2,9 +2,13 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
+import { connectMongoDB } from './db/connectMongoDB.js';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
+
+// підключення до MongoDB
+await connectMongoDB();
 
 app.use(express.json());
 app.use(cors());
