@@ -34,7 +34,7 @@ export const deleteNoteByIdController = async (req, res) => {
 
 export const updateNoteByIdController = async (req, res) => {
   const noteId = req.params.noteId;
-  const result = await Note.findByIdAndUpdate(noteId, req.body);
+  const result = await Note.findByIdAndUpdate(noteId, req.body, { new: true });
   if (!result) {
     throw createHttpError(404, `Note with id=${noteId} not found`);
   }
