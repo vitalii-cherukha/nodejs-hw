@@ -1,12 +1,12 @@
 import createHttpError from 'http-errors';
 import { Note } from '../models/note.js';
 
-export const getNotesController = async (req, res) => {
+export const getAllNotes = async (req, res) => {
   const notes = await Note.find();
   res.status(200).json(notes);
 };
 
-export const getNoteByIdController = async (req, res, next) => {
+export const getNoteById = async (req, res, next) => {
   const noteId = req.params.noteId;
   const note = await Note.findById(noteId);
 
@@ -18,12 +18,12 @@ export const getNoteByIdController = async (req, res, next) => {
   res.status(200).json(note);
 };
 
-export const addNoteController = async (req, res) => {
+export const createNote = async (req, res) => {
   const result = await Note.create(req.body);
   res.status(201).json(result);
 };
 
-export const deleteNoteByIdController = async (req, res) => {
+export const deleteNote = async (req, res) => {
   const noteId = req.params.noteId;
   const result = await Note.findByIdAndDelete(noteId);
   if (!result) {
@@ -32,7 +32,7 @@ export const deleteNoteByIdController = async (req, res) => {
   res.json(result);
 };
 
-export const updateNoteByIdController = async (req, res) => {
+export const updateNote = async (req, res) => {
   const noteId = req.params.noteId;
   const result = await Note.findByIdAndUpdate(noteId, req.body, { new: true });
   if (!result) {
